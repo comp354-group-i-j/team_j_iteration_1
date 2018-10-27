@@ -3,6 +3,8 @@ package com.comp354.teamj.weatherapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
@@ -13,8 +15,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.comp354.teamj.weatherapp.entities.WeatherResponse;
+import com.comp354.teamj.weatherapp.utils.Parser;
+import com.comp354.teamj.weatherapp.views.WeatherDataListView;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     /**
      * Generate the API URL for the GET request.
@@ -40,8 +52,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView mTextView = (TextView) findViewById(R.id.text);
-        mTextView.setMovementMethod(new ScrollingMovementMethod());
+        mRecyclerView = (RecyclerView) findViewById(R.id.weather_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work!")));
+
 
         // Instantiate the RequestQueue
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -56,17 +74,24 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // parse csv data here
-                        mTextView.setText("Response is: " + response);
+                        try {
+                            List<WeatherResponse> list = Parser.stringToItems(response);
+                            mAdapter = new WeatherDataListView(list);
+                            mRecyclerView.setAdapter(mAdapter);
+                        } catch (IOException e) {
+                            mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work!")));
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        mTextView.setText("That didn't work!");
+                        mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work")));
                     }
                 }
         );
 
         // Add the request to the RequestQueue
+        mRecyclerView.setAdapter(this.mAdapter);
         queue.add(stringRequest);
     }
 }
