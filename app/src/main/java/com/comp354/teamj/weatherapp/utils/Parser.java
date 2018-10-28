@@ -51,10 +51,14 @@ public class Parser {
         CsvRow row;
         while ((row = csvParser.nextRow()) != null) {
             Map<String, String> values = row.getFieldMap();
-            WeatherResponse response = new WeatherResponse();
-            response.setDateTime(values.get("Date/Time"));
-            response.setTemperature(values.get("Mean Temp (Â°C)"));
-            items.add(response);
+            String temp = values.get("Temp (Â°C)");
+            // temp is null when weather for specific hour is not yet available
+            if (temp != null) {
+                WeatherResponse response = new WeatherResponse();
+                response.setDateTime(values.get("Date/Time"));
+                response.setTemperature(temp);
+                items.add(response);
+            }
         }
         return items;
     }
