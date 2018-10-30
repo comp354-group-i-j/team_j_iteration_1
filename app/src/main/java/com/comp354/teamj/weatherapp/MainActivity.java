@@ -1,8 +1,10 @@
 package com.comp354.teamj.weatherapp;
 
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,8 +21,14 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
+
+    private BottomNavigationView mBottonBar;
+
+    // List View Components
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -33,14 +41,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.weather_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.weather_recycler_view);
+        DividerItemDecoration decoration = new DividerItemDecoration(mRecyclerView.getContext(), 1);
+        mRecyclerView.addItemDecoration(decoration);
+
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work!")));
-
         final List<WeatherResponse> weatherResponseList = new LinkedList<>();
 
         WeatherDataFetcher weatherDataFetcher = new WeatherDataFetcher(this);
