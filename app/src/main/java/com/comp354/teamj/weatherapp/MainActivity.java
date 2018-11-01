@@ -21,12 +21,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
-
-    private BottomNavigationView mBottonBar;
 
     // List View Components
     private RecyclerView mRecyclerView;
@@ -44,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
 
+        // mBottonBar = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         mRecyclerView = (RecyclerView) findViewById(R.id.weather_recycler_view);
         DividerItemDecoration decoration = new DividerItemDecoration(mRecyclerView.getContext(), 1);
         mRecyclerView.addItemDecoration(decoration);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work!")));
+        mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Initial Empty List")));
         final List<WeatherResponse> weatherResponseList = new LinkedList<>();
 
         WeatherDataFetcher weatherDataFetcher = new WeatherDataFetcher(this);
@@ -65,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
                     mAdapter = new WeatherDataListView(weatherResponseList);
                     mRecyclerView.setAdapter(mAdapter);
                 } catch (IOException e) {
-                    mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work!")));
+                    Log.e("main", "ResponseListener", e);
+                    mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Something went wrong!")));
                 }
             }
         };
@@ -73,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work")));
+                Log.e("main", "ResponseListener", error);
+                mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Something went wrong!")));
             }
         };
 
