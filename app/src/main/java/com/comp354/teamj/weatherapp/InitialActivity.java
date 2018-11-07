@@ -11,17 +11,21 @@ import com.comp354.teamj.weatherapp.utils.AuthUtils;
  * Initial Activity to prompt for login if necessary
  */
 public class InitialActivity extends AppCompatActivity {
+
+    private AuthUtils authUtils;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent activityIntent;
+        authUtils = new AuthUtils(getApplicationContext());
 
         // Check if login is required before showing MainActivity
-        if (AuthUtils.loginRemembered()) {
-            activityIntent = new Intent(this, MainActivity.class);
+        if (authUtils.loginRemembered()) {
+            activityIntent = new Intent(getApplicationContext(), MainActivity.class);
         } else {
-            activityIntent = new Intent(this, LoginActivity.class);
+            activityIntent = new Intent(getApplicationContext(), LoginActivity.class);
         }
 
         startActivity(activityIntent);

@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
 
-        // mBottonBar = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         mRecyclerView = (RecyclerView) findViewById(R.id.weather_recycler_view);
         DividerItemDecoration decoration = new DividerItemDecoration(mRecyclerView.getContext(), 1);
         mRecyclerView.addItemDecoration(decoration);

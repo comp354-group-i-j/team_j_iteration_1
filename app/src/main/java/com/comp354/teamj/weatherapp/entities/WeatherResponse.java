@@ -4,6 +4,9 @@ import android.util.Log;
 
 import java.util.Date;
 
+/**
+ * WeatherResponse is a representation of weather data
+ */
 public class WeatherResponse {
     private Date dateTime;
     private float temperature;

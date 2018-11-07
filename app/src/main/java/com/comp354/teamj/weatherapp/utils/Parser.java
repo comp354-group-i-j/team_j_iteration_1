@@ -19,6 +19,12 @@ public class Parser {
 
     private static final String START_OF_CONTENT = "Date/Time";
 
+    /**
+     * Convert a string weather response into a list of WeatherResponse
+     * @param input String response
+     * @return List of WeatherResponses
+     * @throws IOException
+     */
     public static List<WeatherResponse> stringToItems(String input) throws IOException {
         LinkedList<WeatherResponse> items = new LinkedList<>();
         boolean desiredContent = false;
