@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.android.volley.toolbox.Volley;
-
 /***
  * Utilities for Authentication and Login
  */
@@ -36,8 +34,10 @@ public class AuthUtils {
      * @return Returns if the login was successful
      */
     public boolean login(String username, String password, boolean rememberLogin) {
-        sharedPreferences.edit().putBoolean(AuthUtils.AuthRememberKey, rememberLogin).apply();
-        return DEFAULT_USERNAME.equals(username)
-                && DEFAULT_PASSWORD.equals(password);
+        if (DEFAULT_USERNAME.equals(username) && DEFAULT_PASSWORD.equals(password)) {
+            sharedPreferences.edit().putBoolean(AuthUtils.AuthRememberKey, rememberLogin).apply();
+            return true;
+        }
+        return false;
     }
 }
