@@ -18,6 +18,12 @@ public class WeatherResponse {
         this.message = "";
     }
 
+    public WeatherResponse(WeatherResponse w) {
+        this.dateTime = w.dateTime;
+        this.temperature = w.temperature;
+        this.message = w.message;
+    }
+
     public WeatherResponse(String message) {
         this.message = message.trim();
     }
@@ -50,6 +56,10 @@ public class WeatherResponse {
         this.temperature = tempValue;
     }
 
+    public void setTemperature(float temp) {
+        this.temperature = temp;
+    }
+
     public void setWindSpeed(String windSpeed) {
         float windSpeedValue = 0;
 
@@ -65,6 +75,7 @@ public class WeatherResponse {
     public float getTemperature() {
         return temperature;
     }
+
     public String getTemperatureString() {
         return temperature + " °C";
     }
