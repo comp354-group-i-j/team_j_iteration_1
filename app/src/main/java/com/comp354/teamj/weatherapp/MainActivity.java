@@ -14,19 +14,19 @@ import android.view.View;
 import android.widget.Button;
 
 
+import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.comp354.teamj.weatherapp.entities.WeatherKeys;
 import com.comp354.teamj.weatherapp.entities.WeatherResponse;
+import com.comp354.teamj.weatherapp.utils.MathUtils;
 import com.comp354.teamj.weatherapp.utils.Parser;
 import com.comp354.teamj.weatherapp.utils.WeatherDataFetcher;
 import com.comp354.teamj.weatherapp.views.WeatherDataListView;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,27 +38,25 @@ public class MainActivity extends AppCompatActivity {
     private static final int startYear = 2018;
     private static final int startMonth = 4;
 
+    public static final List<WeatherResponse> weatherResponseList = new LinkedList<>();
+
+    private DecimalFormat formatter = new DecimalFormat("#0.0");
+
     public void viewChart(View view) {
         Intent intentViewChart = new Intent(this, ChartActivity.class);
         startActivity(intentViewChart);
     }
-
-    public static final List<WeatherResponse> weatherResponseList = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.weather_recycler_view);
-        DividerItemDecoration decoration = new DividerItemDecoration(mRecyclerView.getContext(), 1);
-        mRecyclerView.addItemDecoration(decoration);
-
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Initial Empty List")));
+        final TextView averageTemp, averageWindspeed, hotDay, coldDay;
+        averageTemp = findViewById(R.id.averageTemperature);
+        averageWindspeed = findViewById(R.id.averageWindspeed);
+        hotDay = findViewById(R.id.hottestDay);
+        coldDay = findViewById(R.id.coldestDay);
 
         WeatherDataFetcher weatherDataFetcher = new WeatherDataFetcher(this);
 
@@ -78,11 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.d("main", "entries added to list: " + list.size());
                     Log.d("main", "list size: " + weatherResponseList.size());
-                    mAdapter = new WeatherDataListView(weatherResponseList);
-                    mRecyclerView.setAdapter(mAdapter);
+
+                    HashMap<WeatherKeys, Double> summaryValues = MathUtils.getSummaryValues(weatherResponseList);
+
+                    averageTemp.setText(formatter.format(summaryValues.get(WeatherKeys.AVERAGETEMP)));
+                    averageWindspeed.setText(formatter.format(summaryValues.get(WeatherKeys.AVERAGEWIND)));
+                    hotDay.setText(formatter.format(summaryValues.get(WeatherKeys.HOTDAY)));
+                    coldDay.setText(formatter.format(summaryValues.get(WeatherKeys.COLDDAY)));
                 } catch (IOException e) {
                     Log.e("main", "ResponseListener", e);
-                    mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Something went wrong!")));
                 }
             }
         };
@@ -91,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("main", "ResponseListener", error);
-                mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Something went wrong!")));
             }
         };
 
@@ -114,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
             year = startYear + ((monthCounter - 1) / 12);
         }
 
-        mRecyclerView.setAdapter(this.mAdapter);
+
+
     }
 
 }
