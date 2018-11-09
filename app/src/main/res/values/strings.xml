@@ -15,4 +15,9 @@
     </string>
     <string name="title_activity_chart">ChartActivity</string>
     <string name="button_ViewChart">View Chart</string>
+    <string name="text_statsTitle">Your Statistics</string>
+    <string name="avrg_temp_txt">Average Temperature</string>
+    <string name="avrg_windspeed_txt">Average Windspeed</string>
+    <string name="hottest_day_text">Hottest Day</string>
+    <string name="coldest_day_text">Coldest Day</string>
 </resources>

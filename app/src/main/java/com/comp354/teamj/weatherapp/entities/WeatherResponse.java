@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * WeatherResponse is a representation of weather data
+ * Correspond to one line of the CSV
  */
 public class WeatherResponse {
     private Date dateTime;
