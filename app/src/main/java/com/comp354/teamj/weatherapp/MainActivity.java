@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import android.view.View;
 import android.widget.Button;
@@ -105,5 +106,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mRecyclerView.setAdapter(this.mAdapter);
+    }
+
+    void openChart(View view) {
+        Intent intent = new Intent(MainActivity.this, ChartActivity.class);
+        startActivity(intent);
     }
 }
