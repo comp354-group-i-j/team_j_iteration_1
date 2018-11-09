@@ -15,4 +15,14 @@
     </string>
     <string name="title_activity_chart">ChartActivity</string>
     <string name="button_ViewChart">View Chart</string>
+    <string name="text_WindAverage">Wind Speed Average</string>
+    <string name="text_TempAverage">Temperature Average</string>
+    <string name="text_MainSummary">This is the main summary of the weather data app</string>
+    <string name="number_TempAvg">15 °C</string>
+    <string name="number_WindAvg">20 km/h</string>
+    <string name="number_TempLow"> - 2 °C</string>
+    <string name="number_TempHigh">40 °C</string>
+    <string name="text_TempLow">Temperature Low</string>
+    <string name="text_TempHigh">Temperature High</string>
+    <string name="text_statsTitle">Your Statistics</string>
 </resources>
