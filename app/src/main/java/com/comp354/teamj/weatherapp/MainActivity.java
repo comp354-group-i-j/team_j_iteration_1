@@ -1,5 +1,6 @@
 package com.comp354.teamj.weatherapp;
 
+import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,10 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+
+import android.view.View;
+import android.widget.Button;
+
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -31,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int startYear = 2018;
     private static final int startMonth = 4;
+
+    public void viewChart(View view) {
+        Intent intentViewChart = new Intent(this, ChartActivity.class);
+        startActivity(intentViewChart);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
