@@ -25,6 +25,7 @@ import com.comp354.teamj.weatherapp.views.WeatherDataListView;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -68,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     List<WeatherResponse> list = Parser.stringToItems(response);
                     weatherResponseList.addAll(list);
+
+                    // sort weather list
+                    Collections.sort(weatherResponseList, new Comparator<WeatherResponse>() {
+                        public int compare(WeatherResponse w1, WeatherResponse w2) {
+                            return w1.getDateTime().compareTo(w2.getDateTime());
+                        }
+                    });
+
                     Log.d("main", "entries added to list: " + list.size());
                     Log.d("main", "list size: " + weatherResponseList.size());
                     mAdapter = new WeatherDataListView(weatherResponseList);
