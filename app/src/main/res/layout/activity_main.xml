@@ -4,78 +4,134 @@
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
-                                             android:orientation="horizontal"
                                              android:gravity="center"
+                                             android:orientation="horizontal"
                                              tools:context=".MainActivity">
 
     <Button
             android:id="@+id/button_viewChart"
-            android:layout_width="144dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="36dp"
+            android:layout_width="156dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="24dp"
             android:onClick="viewChart"
             android:text="@string/button_ViewChart"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toBottomOf="@+id/hottest_day_text" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent"/>
+
     <TextView
+            android:id="@+id/text_TempAvg"
+            android:layout_width="120dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="12dp"
             android:text="@string/avrg_temp_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp" android:id="@+id/averageTemperatureText" android:layout_marginTop="36dp"
-            app:layout_constraintTop_toBottomOf="@+id/button_viewChart" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/averageWindspeedText"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp" android:id="@+id/averageTemperature" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/averageTemperatureText" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/averageWindspeed"/>
-    <TextView
-            android:text="@string/hottest_day_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp" android:id="@+id/hottestDayText" android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/averageTemperature" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/coldestDayText"/>
+            app:layout_constraintEnd_toStartOf="@+id/text_WindAvg"/>
+
     <TextView
-            android:text="TextView"
+            android:id="@+id/averageTemperature"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/averageWindspeed" android:gravity="center"/>
+
+    <TextView
+            android:id="@+id/text_WindAvg"
+            android:layout_width="120dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/avrg_windspeed_txt"
+            app:layout_constraintStart_toEndOf="@+id/text_TempAvg"
+            app:layout_constraintTop_toBottomOf="@+id/averageWindspeed" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+            android:id="@+id/averageWindspeed"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintStart_toEndOf="@+id/averageTemperature"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent" android:gravity="center"/>
+
+    <TextView
+            android:id="@+id/hottest_day_text"
+            android:layout_width="120dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/hottest_day_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hottestDay" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/coldest_day_text"/>
+
+    <TextView
+            android:id="@+id/hottestDay"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_TempAvg" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/coldestDay" android:gravity="center"/>
+
+    <TextView
+            android:id="@+id/coldest_day_text"
+            android:layout_width="120dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/coldest_day_text"
+            app:layout_constraintStart_toEndOf="@+id/hottest_day_text"
+            app:layout_constraintTop_toBottomOf="@+id/coldestDay" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+            android:id="@+id/coldestDay"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintStart_toEndOf="@+id/hottestDay"
+            app:layout_constraintTop_toBottomOf="@+id/text_WindAvg" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent" android:gravity="center"/>
+
+    <TextView
+            android:id="@+id/text_StatsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp" android:id="@+id/hottestDay" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/hottestDayText" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/coldestDay"/>
-    <TextView
-            android:text="@string/avrg_windspeed_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" tools:layout_editor_absoluteY="128dp" android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent" android:id="@+id/averageWindspeedText"
-            app:layout_constraintStart_toEndOf="@+id/averageTemperatureText" app:layout_constraintHorizontal_bias="0.5"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent" android:id="@+id/averageWindspeed"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/averageWindspeedText"
-            app:layout_constraintStart_toEndOf="@+id/averageTemperature" app:layout_constraintHorizontal_bias="0.5"/>
-    <TextView
-            android:text="@string/coldest_day_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent" android:id="@+id/coldestDayText"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/averageWindspeed"
-            app:layout_constraintStart_toEndOf="@+id/hottestDayText" app:layout_constraintHorizontal_bias="0.5"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent" android:id="@+id/coldestDay"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/coldestDayText"
-            app:layout_constraintStart_toEndOf="@+id/hottestDay" app:layout_constraintHorizontal_bias="0.5"/>
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="47dp"
+            android:text="@string/text_statsTitle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/text_statsTitle"/>
 
 </android.support.constraint.ConstraintLayout>
