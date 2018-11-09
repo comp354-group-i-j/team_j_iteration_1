@@ -1,7 +1,12 @@
 package com.comp354.teamj.weatherapp.entities;
 
+import android.util.Log;
+
 import java.util.Date;
 
+/**
+ * WeatherResponse is a representation of weather data
+ */
 public class WeatherResponse {
     private Date dateTime;
     private float temperature;
@@ -22,7 +27,7 @@ public class WeatherResponse {
         try {
             dateValue = new Date(Date.parse(dateTime));
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            Log.d("WeatherResponse", String.format("Unable to parse date and time '%s'", dateTime));
         }
 
         this.dateTime = dateValue;
@@ -38,7 +43,7 @@ public class WeatherResponse {
         try {
             tempValue = Float.parseFloat(temp);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            Log.d("WeatherResponse", String.format("Unable to parse temperature '%s'", temp));
         }
 
         this.temperature = tempValue;

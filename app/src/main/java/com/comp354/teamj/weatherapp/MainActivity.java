@@ -1,8 +1,10 @@
 package com.comp354.teamj.weatherapp;
 
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,6 +23,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    // List View Components
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -33,14 +37,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.weather_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work!")));
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.weather_recycler_view);
+        DividerItemDecoration decoration = new DividerItemDecoration(mRecyclerView.getContext(), 1);
+        mRecyclerView.addItemDecoration(decoration);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Initial Empty List")));
         final List<WeatherResponse> weatherResponseList = new LinkedList<>();
 
         WeatherDataFetcher weatherDataFetcher = new WeatherDataFetcher(this);
@@ -56,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     mAdapter = new WeatherDataListView(weatherResponseList);
                     mRecyclerView.setAdapter(mAdapter);
                 } catch (IOException e) {
-                    mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work!")));
+                    Log.e("main", "ResponseListener", e);
+                    mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Something went wrong!")));
                 }
             }
         };
@@ -64,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("That didn't work")));
+                Log.e("main", "ResponseListener", error);
+                mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Something went wrong!")));
             }
         };
 
