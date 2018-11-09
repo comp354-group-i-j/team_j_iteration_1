@@ -63,6 +63,10 @@ public class Parser {
                 WeatherResponse response = new WeatherResponse();
                 response.setDateTime(values.get("Date/Time"));
                 response.setTemperature(temp);
+
+                String windSpeed = values.get("Wind Spd (km/h)");
+                response.setWindSpeed(windSpeed);
+
                 items.add(response);
             }
         }
