@@ -10,6 +10,7 @@ import java.util.Date;
 public class WeatherResponse {
     private Date dateTime;
     private float temperature;
+    private float windSpeed;
 
     private String message;
 
@@ -49,11 +50,26 @@ public class WeatherResponse {
         this.temperature = tempValue;
     }
 
+    public void setWindSpeed(String windSpeed) {
+        float windSpeedValue = 0;
+
+        try {
+            windSpeedValue = Float.parseFloat(windSpeed);
+        } catch (NumberFormatException e) {
+            Log.d("WeatherResponse", String.format("Unable to parse windSpeed '%s'", windSpeed));
+        }
+
+        this.windSpeed = windSpeedValue;
+    }
+
     public float getTemperature() {
         return temperature;
     }
     public String getTemperatureString() {
         return temperature + " °C";
+    }
+    public float getWindSpeed() {
+        return windSpeed;
     }
 
     @Override public String toString() {
