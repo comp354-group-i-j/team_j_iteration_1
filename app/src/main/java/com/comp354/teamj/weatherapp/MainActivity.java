@@ -43,15 +43,17 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentViewChart);
     }
 
-    public static final List<WeatherResponse> weatherResponseList = new LinkedList<>();
+     public static final List<WeatherResponse> weatherResponseList = new LinkedList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
+        /*mLayoutManager = new LinearLayoutManager(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.weather_recycler_view);
         DividerItemDecoration decoration = new DividerItemDecoration(mRecyclerView.getContext(), 1);
@@ -116,5 +118,5 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(this.mAdapter);
     }
-
+*/
 }
