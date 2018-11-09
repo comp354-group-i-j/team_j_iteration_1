@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentViewChart);
     }
 
+    public static final List<WeatherResponse> weatherResponseList = new LinkedList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new WeatherDataListView(Collections.singletonList(new WeatherResponse("Initial Empty List")));
-        final List<WeatherResponse> weatherResponseList = new LinkedList<>();
 
         WeatherDataFetcher weatherDataFetcher = new WeatherDataFetcher(this);
 
@@ -108,8 +109,4 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(this.mAdapter);
     }
 
-    void openChart(View view) {
-        Intent intent = new Intent(MainActivity.this, ChartActivity.class);
-        startActivity(intent);
-    }
 }
